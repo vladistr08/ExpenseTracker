@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">ExpenseTracker</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="show_password">Show Password</string>
+    <string name="description">Description</string>
+    <string name="amount">Amount</string>
+    <string name="delete" />
+    <string name="title" > Title </string>
+    <string name="currency">Currency</string>
+    <string name="titleHint">Title</string>
+    <string name="amounthint">Amount</string>
+    <string name="descriptionhint">Description</string>
+    <string name="save_expense">Save Expense</string>
+    <string name="back">Back</string>
+</resources>

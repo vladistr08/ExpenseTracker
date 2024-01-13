@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="167pt"
+    android:layout_height="180pt"
+    android:layout_margin="10dp"
+    android:elevation="42dp"
+    app:cardCornerRadius="10dp"
+    app:layout_constraintWidth_percent="0.5"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent">
+
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <EditText
+        android:id="@+id/titleTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/cardview_shadow_start_color"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="4dp"
+        style="@style/NoUnderlineEditTextStyle"
+        android:text="@string/title"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+        <EditText
+            android:id="@+id/amountTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/amount"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_marginTop="15pt"
+            style="@style/NoUnderlineEditTextStyle"
+            android:padding="4dp" />
+
+    <EditText
+        android:id="@+id/descriptionTextView"
+        android:layout_width="match_parent"
+        android:layout_height="214dp"
+        style="@style/NoUnderlineEditTextStyle"
+        android:layout_marginTop="30pt"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="4dp"
+        android:text="@string/description"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+        <EditText
+            android:id="@+id/dateTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/cardview_shadow_start_color"
+            android:padding="4dp"
+            android:layout_marginTop="120pt"
+            style="@style/NoUnderlineEditTextStyle"
+            android:text="Date"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:inputType="none"
+            android:focusable="false" />
+
+        <Button
+            android:id="@+id/deleteButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="160pt"
+            android:text="Delete record" />
+
+        <Button
+            android:id="@+id/updateButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="140pt"
+            android:text="Update Record" />
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>
