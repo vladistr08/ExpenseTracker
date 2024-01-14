@@ -66,10 +66,12 @@ class AddExpenseActivity: AppCompatActivity() {
             val title = titleEditText.text.toString()
 
             if (amount != null && description.isNotEmpty()) {
+                val selectedCurrencySymbol = currencySpinner.selectedItem.toString()
+                val selectedCurrency = Currency.values().first { it.symbol == selectedCurrencySymbol }
                 val currentUser = FirebaseAuth.getInstance().currentUser
                 val userId = currentUser?.uid.toString()
 
-                val expense = ExpenseModel(generateUUID(), userId, title, amount, description)
+                val expense = ExpenseModel(generateUUID(), userId, title, amount, description, selectedCurrency)
                 val result = ExpenseRepository.addExpense(expense)
 
                 if (result.isSuccess) {

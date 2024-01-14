@@ -6,12 +6,12 @@ plugins {
 
 android {
     namespace = "com.example.expensetracker"
-    compileSdk = 34
+    compileSdk = 34 // Updated to API level 34
 
     defaultConfig {
         applicationId = "com.example.expensetracker"
-        minSdk = 34
-        targetSdk = 34
+        minSdk = 33
+        targetSdk = 33 // Keep as is or update to 34 if desired
         versionCode = 1
         versionName = "1.0"
 
@@ -35,7 +35,6 @@ android {
         jvmTarget = "1.8"
     }
 }
-
 dependencies {
 
     implementation("androidx.core:core-ktx:1.12.0")
