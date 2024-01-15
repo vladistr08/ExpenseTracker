@@ -22,7 +22,7 @@ android:layout_height="match_parent"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_margin="4dp"
-        android:backgroundTint="@color/colorPrimary"
+        android:backgroundTint="@color/colorAccent"
 
         android:layout_weight="1"
         android:padding="2dp"
@@ -35,7 +35,7 @@ android:layout_height="match_parent"
         android:layout_margin="4dp"
         android:layout_weight="1"
         android:padding="2dp"
-        android:backgroundTint="@color/colorPrimary"
+        android:backgroundTint="@color/colorAccent"
 
         android:text="Analytics" />
 
@@ -44,7 +44,6 @@ android:layout_height="match_parent"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_margin="4dp"
-        android:background="@color/colorPrimary"
 
         android:layout_weight="1"
         android:padding="2dp" />
@@ -63,9 +62,11 @@ android:layout_height="match_parent"
 
     <Button
         android:id="@+id/logoutButton"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/colorAccent"
         android:text="Logout"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
