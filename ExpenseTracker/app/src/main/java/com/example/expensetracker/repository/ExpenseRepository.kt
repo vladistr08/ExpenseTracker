@@ -1,7 +1,9 @@
 package com.example.expensetracker.repository
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.example.expensetracker.Enums.Currency
 import com.example.expensetracker.model.ExpenseModel
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.tasks.await
@@ -9,6 +11,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
+import java.util.EnumMap
 
 object ExpenseRepository {
     private const val EXPENSE_COLLECTION = "Expenses"
@@ -88,5 +91,21 @@ object ExpenseRepository {
         } catch (e: Exception) {
             Result.failure(e)
         }
+    }
+    suspend fun getTotalSpentAmount(userId: String, targetCurrency: Currency): Double{
+        val firestore = FirebaseFirestore.getInstance()
+        var totalInUSD = 0.0
+        val documents = firestore.collection(EXPENSE_COLLECTION)
+            .whereEqualTo("userId", userId)
+            .get()
+            .await()
+
+        for (document in documents) {
+            val amount = document.getDouble("amount") ?: 0.0
+            val currency = Currency.valueOf(document.getString("currency") ?: "USD")
+            totalInUSD += Currency.convertToUSD(amount, currency)
+        }
+
+        return Currency.convertFromUSD(totalInUSD, targetCurrency)
     }
 }

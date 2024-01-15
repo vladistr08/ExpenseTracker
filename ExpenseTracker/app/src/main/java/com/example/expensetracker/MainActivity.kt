@@ -17,14 +17,15 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.expensetracker.model.ExpenseSortOptionsEnum
+import com.example.expensetracker.Enums.ExpenseSortOptionsEnum
 import com.example.expensetracker.utils.Utils.Companion.sortExpensesByOption
 import com.example.expensetracker.viewmodel.ExpenseViewModel
 import com.google.firebase.auth.FirebaseAuth
 
 
 
-class MainActivity : AppCompatActivity(), ExpenseAdapterCallback {
+class MainActivity : AppCompatActivity(), ExpenseAdapterCallback,
+    ExpensesAdapter.OnExpenseUpdateListener {
 
     private lateinit var expensesRecyclerView: RecyclerView
     private lateinit var addExpenseButton: Button
@@ -33,6 +34,8 @@ class MainActivity : AppCompatActivity(), ExpenseAdapterCallback {
 
     private lateinit var viewModel: ExpenseViewModel
     private lateinit var expensesAdapter: ExpensesAdapter
+
+    private var lastSelectedPosition = 0
 
     override fun onExpenseDeletionError(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
@@ -60,6 +63,7 @@ class MainActivity : AppCompatActivity(), ExpenseAdapterCallback {
         logoutButton = findViewById(R.id.logoutButton)
 
         expensesAdapter = ExpensesAdapter(lifecycleScope, this)
+        expensesAdapter.updateListener = this
         expensesRecyclerView.adapter = expensesAdapter
 
         expensesRecyclerView = findViewById(R.id.expensesRecyclerView)
@@ -89,13 +93,16 @@ class MainActivity : AppCompatActivity(), ExpenseAdapterCallback {
 
         sortingSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                lastSelectedPosition = position
                 val selectedOption = ExpenseSortOptionsEnum.values()[position]
                 val sortedExpenses = sortExpensesByOption(expensesAdapter.GetExpenses(), selectedOption)
                 expensesAdapter.submitList(sortedExpenses)
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
-                // Handle nothing selected (optional)
+                val selectedOption = ExpenseSortOptionsEnum.values()[lastSelectedPosition]
+                val sortedExpenses = sortExpensesByOption(expensesAdapter.GetExpenses(), selectedOption)
+                expensesAdapter.submitList(sortedExpenses)
             }
         }
     }
@@ -119,5 +126,11 @@ class MainActivity : AppCompatActivity(), ExpenseAdapterCallback {
             remove("lastLoginTimestamp")
             apply()
         }
+    }
+
+    override fun onExpenseUpdated() {
+        val selectedOption = ExpenseSortOptionsEnum.values()[lastSelectedPosition]
+        val sortedExpenses = sortExpensesByOption(expensesAdapter.GetExpenses(), selectedOption)
+        expensesAdapter.submitList(sortedExpenses)
     }
 }

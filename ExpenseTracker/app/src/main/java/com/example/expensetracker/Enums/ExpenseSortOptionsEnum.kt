@@ -1,4 +1,4 @@
-package com.example.expensetracker.model
+package com.example.expensetracker.Enums
 
 enum class ExpenseSortOptionsEnum(val displayName: String) {
     DATE_OLDEST("Date (Oldest)"),
@@ -7,6 +7,6 @@ enum class ExpenseSortOptionsEnum(val displayName: String) {
     AMOUNT_LOWEST("Amount (Lowest)");
 
     companion object {
-        fun getDefault() = ExpenseSortOptionsEnum.DATE_OLDEST
+        fun getDefault() = DATE_OLDEST
     }
 }

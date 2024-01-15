@@ -8,7 +8,7 @@ import android.widget.EditText
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
-import com.example.expensetracker.model.Currency
+import com.example.expensetracker.Enums.Currency
 import com.example.expensetracker.model.ExpenseModel
 import com.example.expensetracker.repository.ExpenseRepository
 import com.google.firebase.auth.FirebaseAuth

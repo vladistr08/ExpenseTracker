@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.lifecycle.LifecycleCoroutineScope
 import androidx.recyclerview.widget.RecyclerView
 import com.example.expensetracker.R
-import com.example.expensetracker.model.Currency
+import com.example.expensetracker.Enums.Currency
 import com.example.expensetracker.model.ExpenseModel
 import com.example.expensetracker.repository.ExpenseRepository
 import kotlinx.coroutines.launch
@@ -19,6 +19,12 @@ interface ExpenseAdapterCallback {
 }
 
 class ExpensesAdapter(private val lifecycleScope: LifecycleCoroutineScope, private val callback: ExpenseAdapterCallback)  : RecyclerView.Adapter<ExpensesAdapter.ExpenseViewHolder>() {
+
+    interface OnExpenseUpdateListener {
+        fun onExpenseUpdated()
+    }
+
+    var updateListener: OnExpenseUpdateListener? = null
 
     private var expenses = listOf<ExpenseModel>()
 
@@ -65,6 +71,7 @@ class ExpensesAdapter(private val lifecycleScope: LifecycleCoroutineScope, priva
             val result = ExpenseRepository.updateExpense(updatedExpense)
             if (result.isSuccess) {
                 notifyItemChanged(position)
+                updateListener?.onExpenseUpdated()
             } else {
                 result.exceptionOrNull()?.let {
                     callback.onExpenseUpdateError(it.message ?: "Error updating expense.")
@@ -89,8 +96,12 @@ class ExpensesAdapter(private val lifecycleScope: LifecycleCoroutineScope, priva
         holder.updateButton.setOnClickListener {
             val amountCurrencyText = holder.amountTextView.text.toString()
             val (amountText, currencySymbol) = amountCurrencyText.split(" ", limit = 2)
-            val amount = amountText.toDoubleOrNull() ?: 0.0
+            var amount = amountText.toDoubleOrNull() ?: 0.0
             val currency = Currency.values().find { it.symbol == currencySymbol } ?: Currency.getDefault()
+
+            if(expense.currency != currency && expense.amount == amount){
+                amount = Currency.convertCurrencies(amount, expense.currency, currency)
+            }
 
             val updatedExpense = expense.copy(
                 id = expense.id,

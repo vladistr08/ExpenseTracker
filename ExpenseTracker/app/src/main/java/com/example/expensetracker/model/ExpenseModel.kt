@@ -1,7 +1,6 @@
 package com.example.expensetracker.model
 
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
+import com.example.expensetracker.Enums.Currency
 
 data class ExpenseModel(
     val id: String = "no_id",

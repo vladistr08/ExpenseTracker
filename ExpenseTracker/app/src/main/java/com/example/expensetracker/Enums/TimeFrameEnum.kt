@@ -1,4 +1,4 @@
-package com.example.expensetracker.model
+package com.example.expensetracker.Enums
 
 enum class TimeFrame(val value: String) {
     DAY("Day"), MONTH("Month"), YEAR("Year");

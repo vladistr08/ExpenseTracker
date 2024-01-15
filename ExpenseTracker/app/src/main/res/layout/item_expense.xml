@@ -2,9 +2,10 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="167pt"
-    android:layout_height="190pt"
+    android:layout_height="160pt"
     android:layout_margin="10dp"
     android:elevation="42dp"
+    android:backgroundTint="@color/colorPrimary"
     app:cardCornerRadius="10dp"
     app:layout_constraintWidth_percent="0.5"
     app:layout_constraintStart_toStartOf="parent"
@@ -65,17 +66,22 @@
 
         <Button
             android:id="@+id/deleteButton"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/updateButton"
-            android:layout_marginTop="47dp"
+            android:backgroundTint="@color/colorAccent"
+            android:layout_below="@id/dateTextView"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="20dp"
             android:text="Delete record" />
 
         <Button
             android:id="@+id/updateButton"
-            android:layout_width="match_parent"
+            android:backgroundTint="@color/colorAccent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="140pt"
+            android:layout_below="@id/dateTextView"
+            android:layout_toEndOf="@id/deleteButton"
+            android:layout_marginStart="18dp"
             android:text="Update Record" />
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

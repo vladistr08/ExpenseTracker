@@ -2,35 +2,52 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorSecondary"
     android:padding="16dp">
 
-    <!-- Summary Card for Total Expenses -->
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardTotalExpenses"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        app:cardCornerRadius="8dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
 
-        <!-- Content for the Card like ImageView, TextView for displaying total expense etc. -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Total Spending"
+            android:layout_gravity="center"
+            android:textSize="38sp"
+            android:layout_marginBottom="8dp"/>
 
-    </androidx.cardview.widget.CardView>
+        <TextView
+            android:id="@+id/tvTotalSpending"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0.00 "
+            android:textSize="20sp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="16dp"/>
 
-    <!-- A ListView or RecyclerView can be used to display a list of transactions -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvTransactionsList"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@id/cardTotalExpenses"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        <Spinner
+            android:layout_gravity="center"
 
-        <!-- Adapter items for each transaction -->
+            android:id="@+id/currencySpinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/currency" />
 
-    </androidx.recyclerview.widget.RecyclerView>
+        <Button
+            android:id="@+id/backButton"
+            android:backgroundTint="@color/colorPrimary"
+            android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:text="Back"
+           android:textSize="30sp"
+           android:layout_marginTop="450sp"
+           >
+
+       </Button>
+
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
