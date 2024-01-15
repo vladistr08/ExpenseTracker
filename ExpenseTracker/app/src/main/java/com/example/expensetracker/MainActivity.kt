@@ -120,7 +120,6 @@ class MainActivity : AppCompatActivity(), ExpenseAdapterCallback,
     private fun logoutUser() {
         FirebaseAuth.getInstance().signOut()
 
-        // Clear the saved timestamp
         val sharedPref = getSharedPreferences("AppPreferences", Context.MODE_PRIVATE)
         with(sharedPref.edit()) {
             remove("lastLoginTimestamp")

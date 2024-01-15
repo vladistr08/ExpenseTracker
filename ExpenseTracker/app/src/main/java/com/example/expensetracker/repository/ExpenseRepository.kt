@@ -50,13 +50,11 @@ object ExpenseRepository {
 
     suspend fun updateExpense(updatedExpense: ExpenseModel): Result<Unit> = withContext(Dispatchers.IO) {
         return@withContext try {
-            // Find the document with the matching 'id'
             val querySnapshot = getFirestoreInstance().collection(EXPENSE_COLLECTION)
                 .whereEqualTo("id", updatedExpense.id)
                 .get()
                 .await()
 
-            // Assuming 'id' is unique and there's only one matching document
             val documentSnapshot = querySnapshot.documents.firstOrNull()
             if (documentSnapshot != null) {
                 getFirestoreInstance().collection(EXPENSE_COLLECTION)
@@ -79,7 +77,6 @@ object ExpenseRepository {
                 .get()
                 .await()
 
-            // Assuming there's only one expense with this ID
             if (!querySnapshot.isEmpty) {
                 for (document in querySnapshot.documents) {
                     document.reference.delete().await()
@@ -93,9 +90,8 @@ object ExpenseRepository {
         }
     }
     suspend fun getTotalSpentAmount(userId: String, targetCurrency: Currency): Double{
-        val firestore = FirebaseFirestore.getInstance()
         var totalInUSD = 0.0
-        val documents = firestore.collection(EXPENSE_COLLECTION)
+        val documents = getFirestoreInstance().collection(EXPENSE_COLLECTION)
             .whereEqualTo("userId", userId)
             .get()
             .await()

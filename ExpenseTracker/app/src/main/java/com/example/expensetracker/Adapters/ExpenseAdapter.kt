@@ -30,7 +30,7 @@ class ExpensesAdapter(private val lifecycleScope: LifecycleCoroutineScope, priva
 
     fun submitList(newList: List<ExpenseModel>) {
         expenses = newList
-        notifyDataSetChanged() // Notify the adapter that the data has changed
+        notifyDataSetChanged()
     }
 
     fun GetExpenses(): List<ExpenseModel>{
@@ -38,7 +38,6 @@ class ExpensesAdapter(private val lifecycleScope: LifecycleCoroutineScope, priva
     }
 
     class ExpenseViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        // Assuming you have TextViews in your layout for title and amount
         val titleTextView: EditText = view.findViewById(R.id.titleTextView)
         val amountTextView: EditText = view.findViewById(R.id.amountTextView)
         val descriptionTextView: EditText = view.findViewById(R.id.descriptionTextView)
@@ -83,13 +82,12 @@ class ExpensesAdapter(private val lifecycleScope: LifecycleCoroutineScope, priva
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ExpenseViewHolder, position: Int) {
         val expense = expenses[position]
-        holder.titleTextView.setText(expense.title) // Assuming 'title' is a field in ExpenseModel
-        holder.amountTextView.setText(expense.amount.toString() + ' ' + expense.currency.symbol) // Convert amount to String if it's not
+        holder.titleTextView.setText(expense.title)
+        holder.amountTextView.setText(expense.amount.toString() + ' ' + expense.currency.symbol)
         holder.descriptionTextView.setText(expense.description)
         holder.dateTextView.text = "Date: " + expense.date
 
         holder.deleteButton.setOnClickListener {
-            // Handle delete
             deleteExpense(expense.id, position)
         }
 
